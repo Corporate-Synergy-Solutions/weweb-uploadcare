@@ -28,3 +28,11 @@ Initial release
 ### 0.0.3
 
 -   refactor migrate from component wrapper to root component
+
+### 0.0.4
+
+-   revert refactor migrate root component
+-   add label props for each types (pending api uploadcare error)
+-   add bindable endpoint props
+-   add metadata props
+-   add component id props to store data
