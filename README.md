@@ -13,3 +13,14 @@ To serve locally, run `npm run serve --port=[PORT]`, and then go to Weweb editor
 ## Build
 
 Before release, you can check build error by running `npm run build --name=my-element`
+
+## Releases
+
+### 0.0.1
+
+Initial release
+
+### 0.0.2
+
+-   fix mandatory props ctx-name
+-   add uploader type props
