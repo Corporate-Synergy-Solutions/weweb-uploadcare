@@ -18,18 +18,72 @@ export default {
             },
             type: 'Text',
             defaultValue: 'contextName',
+            bindable: true,
         },
         uploaderType: {
             label: { en: 'Uploader type' },
             type: 'TextSelect',
             options: {
                 options: [
-                    { value: 'minimal', label: { en: 'Minimal' } },
                     { value: 'regular', label: { en: 'Regular' } },
+                    { value: 'minimal', label: { en: 'Minimal' } },
                     { value: 'inline', label: { en: 'Inline' } },
                 ],
             },
-            defaultValue: 'minimal',
+            defaultValue: 'regular',
+        },
+        labelRegular: {
+            label: {
+                en: 'label',
+            },
+            type: 'Text',
+            defaultValue: 'Upload files',
+            hidden: content => content.uploaderType !== 'regular',
+        },
+        labelMinimal: {
+            label: {
+                en: 'label',
+            },
+            type: 'Text',
+            defaultValue: 'Choose files',
+            hidden: content => content.uploaderType !== 'minimal',
+        },
+        labelInline: {
+            label: {
+                en: 'label',
+            },
+            type: 'Text',
+            defaultValue: 'Drop files',
+            hidden: content => content.uploaderType !== 'inline',
+        },
+        isImageEditor: {
+            label: {
+                en: 'Image editor',
+            },
+            type: 'OnOff',
+            defaultValue: true,
+        },
+        idComponentBind: {
+            label: {
+                en: 'Content variable id',
+            },
+            type: 'Text',
+            defaultValue: '',
+        },
+        metadata: {
+            label: {
+                en: 'Metadata',
+            },
+            type: 'Text',
+            defaultValue: '',
+        },
+        endpoint: {
+            label: {
+                en: 'Endpoint',
+            },
+            type: 'Text',
+            defaultValue: 'https://ucarecdn.com',
+            bindable: true,
         },
     },
 };
