@@ -24,3 +24,7 @@ Initial release
 
 -   fix mandatory props ctx-name
 -   add uploader type props
+
+### 0.0.3
+
+-   refactor migrate from component wrapper to root component
