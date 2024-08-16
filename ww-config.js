@@ -10,7 +10,26 @@ export default {
                 en: 'Uploadcare key',
             },
             type: 'Text',
-            defaultValue: 'a6ca334c3520777c0045',
+            defaultValue: '',
+        },
+        ctxName: {
+            label: {
+                en: 'Context name',
+            },
+            type: 'Text',
+            defaultValue: 'contextName',
+        },
+        uploaderType: {
+            label: { en: 'Uploader type' },
+            type: 'TextSelect',
+            options: {
+                options: [
+                    { value: 'minimal', label: { en: 'Minimal' } },
+                    { value: 'regular', label: { en: 'Regular' } },
+                    { value: 'inline', label: { en: 'Inline' } },
+                ],
+            },
+            defaultValue: 'minimal',
         },
     },
 };

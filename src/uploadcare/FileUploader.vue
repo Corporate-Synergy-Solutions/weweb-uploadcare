@@ -1,7 +1,12 @@
 <template>
-    <uc-config :ctx-name="config.ctxName" :pubKey="config.key"></uc-config>
+    <uc-config :ctx-name="config.ctxName" v-bind="config"></uc-config>
 
-    <uc-file-uploader-regular :ctx-name="config.ctxName"></uc-file-uploader-regular>
+    <uc-file-uploader-regular v-if="uploaderType === 'regular'" :ctx-name="config.ctxName"></uc-file-uploader-regular>
+    <uc-file-uploader-minimal
+        v-else-if="uploaderType === 'minimal'"
+        :ctx-name="config.ctxName"
+    ></uc-file-uploader-minimal>
+    <uc-file-uploader-inline v-else :ctx-name="config.ctxName"></uc-file-uploader-inline>
 
     <uc-upload-ctx-provider
         :ctx-name="config.ctxName"
@@ -27,6 +32,10 @@ const props = defineProps({
     },
     config: {
         type: Object,
+        required: true,
+    },
+    uploaderType: {
+        type: String,
         required: true,
     },
 });
@@ -55,7 +64,6 @@ function handleModalCloseEvent() {
 }
 
 onMounted(() => {
-    UC.defineComponents(UC);
     configRef.localeDefinitionOverride = {
         en: {
             'upload-file': 'Upload file',
