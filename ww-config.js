@@ -63,6 +63,13 @@ export default {
             type: 'OnOff',
             defaultValue: true,
         },
+        isImageOnly: {
+            label: {
+                en: 'Image only',
+            },
+            type: 'OnOff',
+            defaultValue: true,
+        },
         idComponentBind: {
             label: {
                 en: 'Content variable id',
@@ -76,6 +83,7 @@ export default {
             },
             type: 'Text',
             defaultValue: '',
+            bindable: true,
         },
         endpoint: {
             label: {

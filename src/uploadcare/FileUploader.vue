@@ -9,7 +9,6 @@
         ref="ctxProviderRef"
         :ctx-name="ctxName"
         @change="handleChangeEvent"
-        @modal-close="handleModalCloseEvent"
     ></uc-upload-ctx-provider>
 </template>
 
@@ -38,6 +37,14 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    metadata: {
+        type: String,
+        default: '{}',
+    },
+    overrideLabel: {
+        type: Object,
+        default: () => {},
+    },
 });
 
 const emit = defineEmits(['update:files']);
@@ -46,49 +53,30 @@ const uploadedFiles = ref([]);
 const ctxProviderRef = ref(null);
 const configRef = ref(null);
 
-function resetUploaderState() {
-    ctxProviderRef.value.getAPI().removeAllFiles();
-}
-
 function handleChangeEvent(e) {
     if (e.detail) {
         uploadedFiles.value = e.detail.allEntries.filter(f => f.status === 'success');
+        emit('update:files', uploadedFiles.value);
     }
 }
 
-function handleModalCloseEvent() {
-    resetUploaderState();
-
-    emit('update:files', [...props.files, ...uploadedFiles.value]);
-    uploadedFiles.value = [];
+function parseJson(str) {
+    let obj = {};
+    try {
+        obj = JSON.parse(str);
+    } catch (e) {
+        return {};
+    }
+    return obj;
 }
 
 onMounted(() => {
-    configRef.localeDefinitionOverride = {
-        en: {
-            photo__one: 'photo',
-            photo__many: 'photos',
-            photo__other: 'photos',
-
-            'upload-file': 'Upload photo',
-            'upload-files': 'Upload photos',
-            'choose-file': 'Choose photo',
-            'choose-files': 'Choose photos',
-            'drop-files-here': 'Drop photos here',
-            'select-file-source': 'Select photo source',
-            'edit-image': 'Edit photo',
-            'no-files': 'No photos selected',
-            'caption-edit-file': 'Edit photo',
-            'files-count-allowed': 'Only {{count}} {{plural:photo(count)}} allowed',
-            'files-max-size-limit-error': 'Photo is too big. Max photo size is {{maxFileSize}}.',
-            'header-uploading': 'Uploading {{count}} {{plural:photo(count)}}',
-            'header-succeed': '{{count}} {{plural:photo(count)}} uploaded',
-            'header-total': '{{count}} {{plural:photo(count)}} selected',
-        },
-    };
+    configRef.value.localeDefinitionOverride = props.overrideLabel;
+    configRef.value.metadata = parseJson(props.metadata);
 });
 
 onBeforeUnmount(() => {
-    configRef.localeDefinitionOverride = null;
+    configRef.value.localeDefinitionOverride = null;
+    configRef.value.metadata = null;
 });
 </script>
