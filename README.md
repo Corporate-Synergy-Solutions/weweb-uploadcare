@@ -36,3 +36,16 @@ Initial release
 -   add bindable endpoint props
 -   add metadata props
 -   add component id props to store data
+
+### 0.0.5
+
+-   fix metadata injection
+-   add isImageOnly props
+
+### 0.0.6
+
+-   add accept file types props
+-   add removeCopyright props
+-   add themeColor props
+-   rename label types
+-   remove endpoint (cdn url) props
