@@ -7,6 +7,7 @@
         :metadata="content.metadata"
         :overrideLabel="overrideLabel"
         :config="config"
+        :themeColor="content.themeColor"
     />
 </template>
 
@@ -25,7 +26,8 @@ const config = computed(() => {
         pubkey: props.content.key,
         'img-only': props.content.isImageOnly,
         'use-cloud-image-editor': props.content.isImageEditor,
-        'cdn-cname': props.content.endpoint,
+        accept: !props.content.isImageOnly ? props.content.accept : '',
+        'remove-copyright': props.content.removeCopyright,
     };
 });
 

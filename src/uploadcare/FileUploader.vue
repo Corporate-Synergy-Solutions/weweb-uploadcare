@@ -1,9 +1,17 @@
 <template>
     <uc-config ref="configRef" :ctx-name="ctxName" v-bind="config"></uc-config>
 
-    <uc-file-uploader-regular v-if="uploaderType === 'regular'" :ctx-name="ctxName"></uc-file-uploader-regular>
-    <uc-file-uploader-minimal v-else-if="uploaderType === 'minimal'" :ctx-name="ctxName"></uc-file-uploader-minimal>
-    <uc-file-uploader-inline v-else :ctx-name="ctxName"></uc-file-uploader-inline>
+    <uc-file-uploader-regular
+        v-if="uploaderType === 'regular'"
+        :ctx-name="ctxName"
+        class="uploadcare-file-uploader"
+    ></uc-file-uploader-regular>
+    <uc-file-uploader-minimal
+        v-else-if="uploaderType === 'minimal'"
+        :ctx-name="ctxName"
+        class="uploadcare-file-uploader"
+    ></uc-file-uploader-minimal>
+    <uc-file-uploader-inline v-else :ctx-name="ctxName" class="uploadcare-file-uploader"></uc-file-uploader-inline>
 
     <uc-upload-ctx-provider
         ref="ctxProviderRef"
@@ -17,7 +25,8 @@ import '@uploadcare/file-uploader/web/uc-file-uploader-inline.min.css';
 import '@uploadcare/file-uploader/web/uc-file-uploader-regular.min.css';
 import '@uploadcare/file-uploader/web/uc-file-uploader-minimal.min.css';
 import * as UC from '@uploadcare/file-uploader';
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { converter } from 'culori';
 
 UC.defineComponents(UC);
 const props = defineProps({
@@ -44,6 +53,10 @@ const props = defineProps({
     overrideLabel: {
         type: Object,
         default: () => {},
+    },
+    themeColor: {
+        type: String,
+        default: '',
     },
 });
 
@@ -79,4 +92,16 @@ onBeforeUnmount(() => {
     configRef.value.localeDefinitionOverride = null;
     configRef.value.metadata = null;
 });
+
+const oklch = converter('oklch');
+const oklchCulori = computed(() => {
+    const oklchObj = oklch(props.themeColor);
+    return `${oklchObj.l} ${oklchObj.c} ${oklchObj.h}`;
+});
 </script>
+
+<style scoped>
+.uploadcare-file-uploader {
+    --uc-primary-oklch-light: v-bind('oklchCulori');
+}
+</style>

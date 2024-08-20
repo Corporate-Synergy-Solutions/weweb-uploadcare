@@ -34,7 +34,7 @@ export default {
         },
         labelRegular: {
             label: {
-                en: 'label',
+                en: 'Label regular',
             },
             type: 'Text',
             defaultValue: 'Upload files',
@@ -42,7 +42,7 @@ export default {
         },
         labelMinimal: {
             label: {
-                en: 'label',
+                en: 'Label minimal',
             },
             type: 'Text',
             defaultValue: 'Choose files',
@@ -50,7 +50,7 @@ export default {
         },
         labelInline: {
             label: {
-                en: 'label',
+                en: 'Label inline',
             },
             type: 'Text',
             defaultValue: 'Drop files',
@@ -62,6 +62,7 @@ export default {
             },
             type: 'OnOff',
             defaultValue: true,
+            hidden: content => content.uploaderType === 'minimal',
         },
         isImageOnly: {
             label: {
@@ -69,6 +70,18 @@ export default {
             },
             type: 'OnOff',
             defaultValue: true,
+        },
+        accept: {
+            label: {
+                en: 'Accept file types',
+            },
+            type: 'Text',
+            defaultValue: '',
+            hidden: content => content.isImageOnly,
+            bindingValidation: {
+                type: 'string',
+                tooltip: 'e.g. .png, .jpg, .jpeg',
+            },
         },
         idComponentBind: {
             label: {
@@ -85,13 +98,19 @@ export default {
             defaultValue: '',
             bindable: true,
         },
-        endpoint: {
+        removeCopyright: {
             label: {
-                en: 'Endpoint',
+                en: 'Remove copyright',
             },
-            type: 'Text',
-            defaultValue: 'https://ucarecdn.com',
-            bindable: true,
+            type: 'OnOff',
+            defaultValue: true,
+        },
+        themeColor: {
+            label: {
+                en: 'Theme color',
+            },
+            type: 'Color',
+            defaultValue: '#3771FF',
         },
     },
 };
