@@ -14,7 +14,7 @@
     "prettier": "^3.3.3"
   },
   "dependencies": {
-    "@uploadcare/file-uploader": "^1.4.0",
+    "@uploadcare/file-uploader": "^1.5.1",
     "culori": "^4.0.1"
   }
 }

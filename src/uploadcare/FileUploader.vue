@@ -25,7 +25,7 @@ import '@uploadcare/file-uploader/web/uc-file-uploader-inline.min.css';
 import '@uploadcare/file-uploader/web/uc-file-uploader-regular.min.css';
 import '@uploadcare/file-uploader/web/uc-file-uploader-minimal.min.css';
 import * as UC from '@uploadcare/file-uploader';
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import { converter } from 'culori';
 
 UC.defineComponents(UC);
@@ -92,6 +92,23 @@ onBeforeUnmount(() => {
     configRef.value.localeDefinitionOverride = null;
     configRef.value.metadata = null;
 });
+
+watch(
+    () => props.metadata,
+    () => {
+        configRef.value.metadata = null;
+        configRef.value.metadata = parseJson(props.metadata);
+    }
+);
+
+watch(
+    () => props.overrideLabel,
+    () => {
+        configRef.value.localeDefinitionOverride = null;
+        configRef.value.localeDefinitionOverride = props.overrideLabel;
+    },
+    { deep: true }
+);
 
 const oklch = converter('oklch');
 const oklchCulori = computed(() => {

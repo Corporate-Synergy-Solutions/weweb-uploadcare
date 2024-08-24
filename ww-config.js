@@ -56,6 +56,13 @@ export default {
             defaultValue: 'Drop files',
             hidden: content => content.uploaderType !== 'inline',
         },
+        multiple: {
+            label: {
+                en: 'Multiple',
+            },
+            type: 'OnOff',
+            defaultValue: true,
+        },
         isImageEditor: {
             label: {
                 en: 'Image editor',
