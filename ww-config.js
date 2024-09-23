@@ -89,13 +89,15 @@ export default {
                 type: 'string',
                 tooltip: 'e.g. .png, .jpg, .jpeg',
             },
+            bindable: true,
         },
         idComponentBind: {
             label: {
-                en: 'Content variable id',
+                en: 'Files output variable',
             },
             type: 'Text',
             defaultValue: '',
+            bindable: true,
         },
         metadata: {
             label: {

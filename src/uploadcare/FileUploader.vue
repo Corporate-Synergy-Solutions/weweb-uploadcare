@@ -47,8 +47,8 @@ const props = defineProps({
         required: true,
     },
     metadata: {
-        type: String,
-        default: '{}',
+        type: [String, Object],
+        default: () => {},
     },
     overrideLabel: {
         type: Object,
@@ -85,7 +85,7 @@ function parseJson(str) {
 
 onMounted(() => {
     configRef.value.localeDefinitionOverride = props.overrideLabel;
-    configRef.value.metadata = parseJson(props.metadata);
+    configRef.value.metadata = typeof props.metadata === 'string' ? parseJson(props.metadata) : props.metadata;
 });
 
 onBeforeUnmount(() => {
@@ -97,7 +97,7 @@ watch(
     () => props.metadata,
     () => {
         configRef.value.metadata = null;
-        configRef.value.metadata = parseJson(props.metadata);
+        configRef.value.metadata = typeof props.metadata === 'string' ? parseJson(props.metadata) : props.metadata;
     }
 );
 
