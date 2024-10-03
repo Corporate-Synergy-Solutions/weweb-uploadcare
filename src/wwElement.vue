@@ -48,5 +48,12 @@ const updateComponent = ref(0);
 watch(config, () => (updateComponent.value += 1), { deep: true });
 watch(files, val => {
     if (props.content.idComponentBind) wwLib.wwVariable.updateValue(props.content.idComponentBind, val);
+// Execute the workflow and handle errors
+  try {
+    wwLib.wwWorkflow.executeGlobal('bde1211e-11ba-4121-aae9-71b88cda4d21');
+  } catch (error) {
+    // Do nothing if an error occurs
+    console.error('Workflow execution error:', error); // Optionally log the error
+  }
 });
 </script>
