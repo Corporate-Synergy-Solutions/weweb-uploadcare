@@ -8,6 +8,13 @@
         :overrideLabel="overrideLabel"
         :config="config"
         :themeColor="content.themeColor"
+        @uploaded="
+            e =>
+                $emit('trigger-event', {
+                    name: 'file:uploaded',
+                    event: e,
+                })
+        "
     />
 </template>
 

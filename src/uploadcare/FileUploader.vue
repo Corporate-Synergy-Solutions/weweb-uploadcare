@@ -60,7 +60,7 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(['update:files']);
+const emit = defineEmits(['update:files', 'uploaded']);
 
 const uploadedFiles = ref([]);
 const ctxProviderRef = ref(null);
@@ -70,6 +70,7 @@ function handleChangeEvent(e) {
     if (e.detail) {
         uploadedFiles.value = e.detail.allEntries.filter(f => f.status === 'success');
         emit('update:files', uploadedFiles.value);
+        emit('uploaded', uploadedFiles.value);
     }
 }
 

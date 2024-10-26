@@ -122,4 +122,11 @@ export default {
             defaultValue: '#3771FF',
         },
     },
+    triggerEvents: [
+        {
+            name: 'file:uploaded',
+            label: { en: 'On file uploaded' },
+            event: {},
+        },
+    ],
 };
